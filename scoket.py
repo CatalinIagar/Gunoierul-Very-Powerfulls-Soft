@@ -2,31 +2,43 @@ import asyncio
 import websockets
 
 async def connect_to_websocket(uri):
-    # Connect to the WebSocket server
-    print("Connecting to {}".format(uri))
-    async with websockets.connect(uri) as websocket:
-        print("Connected to {}".format(uri))
-        
-        # Send a message to the server
-        message_to_send = "Hello, WebSocket Server!"
-        await websocket.send(message_to_send)
-        print("Sent to {}".format(message_to_send))
-        
-        # Wait and receive a message from the server
-        response = await websocket.recv()
-        print("Received: {}".format(response))
+    try:
+        # Connect to the WebSocket server
+        print("Connecting to {}".format(uri))
+        async with websockets.connect(uri) as websocket:
+            print("Connected to {}".format(uri))
 
-        # Optionally, you can continue sending and receiving messages in a loop
-        # For example, you can implement a simple chat functionality
-        while True:
-            # Get user input to send to the server
-            message_to_send = input("Enter message to send: ")
+            # Send a message to the server
+            message_to_send = "Hello, WebSocket Server!"
             await websocket.send(message_to_send)
-            print("Sent: {}".format(message_to_send))
+            print("Sent to {}".format(message_to_send))
 
-            # Receive and print the response from the server
+            # Wait and receive a message from the server
             response = await websocket.recv()
             print("Received: {}".format(response))
+
+            # Optionally, you can continue sending and receiving messages in a loop
+            # For example, you can implement a simple chat functionality
+            while True:
+                # Get user input to send to the server
+                message_to_send = input("Enter message to send: ")
+                await websocket.send(message_to_send)
+                print("Sent: {}".format(message_to_send))
+
+                # Receive and print the response from the server
+                response = await websocket.recv()
+                print("Received: {}".format(response))
+
+    except websockets.exceptions.InvalidURI as e:
+        print("Invalid WebSocket URI: {}".format(e))
+    except websockets.exceptions.WebSocketException as e:
+        print("WebSocket error: {}".format(e))
+    except ConnectionRefusedError as e:
+        print("Connection refused. The server might not be running or reachable: {}".format(e))
+    except asyncio.TimeoutError as e:
+        print("Connection timed out: {}".format(e))
+    except Exception as e:
+        print("An error occurred: {}".format(e))
 
 # URI of the WebSocket server
 uri = "ws://192.168.88.117:5000"  # Replace with the actual URI of the server
