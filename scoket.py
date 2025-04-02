@@ -28,7 +28,7 @@ async def connect_to_websocket(uri):
             print("Received: {}".format(response))
 
 # URI of the WebSocket server
-uri = "192.168.88.117:5000"  # Replace with the actual URI of the server
+uri = "ws://192.168.88.117:5000"  # Replace with the actual URI of the server
 
 # Run the WebSocket client
 asyncio.get_event_loop().run_until_complete(connect_to_websocket(uri))
