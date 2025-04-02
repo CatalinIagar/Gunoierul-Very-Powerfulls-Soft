@@ -15,7 +15,7 @@ async def connect_to_websocket(uri):
 
             # Wait and receive a message from the server (UTF-8 decoded)
             response = await websocket.recv()
-            print("Received: {}".format(response.decode('utf-8')))  # Decoding the response to UTF-8
+            print("Received: {}".format(response))  # Decoding the response to UTF-8
 
             # Optionally, you can continue sending and receiving messages in a loop
             while True:
@@ -26,7 +26,7 @@ async def connect_to_websocket(uri):
 
                 # Receive and print the response from the server
                 response = await websocket.recv()
-                print("Received: {}".format(response.decode('utf-8')))  # Decoding the response to UTF-8
+                print("Received: {}".format(response))  # Decoding the response to UTF-8
 
     except websockets.exceptions.InvalidURI as e:
         print("Invalid WebSocket URI: {}".format(e))
