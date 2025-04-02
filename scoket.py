@@ -3,6 +3,7 @@ import websockets
 
 async def connect_to_websocket(uri):
     # Connect to the WebSocket server
+    print("Connecting to {}".format(uri))
     async with websockets.connect(uri) as websocket:
         print("Connected to {}".format(uri))
         
