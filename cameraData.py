@@ -20,7 +20,7 @@ async def log_camera_data():
             # Log the camera frame details (such as timestamp and frame size)
             timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
             height, width, _ = frame.shape
-            print(f"Timestamp: {timestamp} | Frame size: {width}x{height}")
+            print("Timestamp: {} | Frame size: {}x{}".format(timestamp, width, height))
 
             # Optionally, display the frame locally
             cv2.imshow('Camera', frame)
